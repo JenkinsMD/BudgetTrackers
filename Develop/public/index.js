@@ -122,6 +122,7 @@ function sendTransaction(isAdding) {
     }
   })
   .then(response => {    
+   
     return response.json();
   })
   .then(data => {
@@ -135,6 +136,8 @@ function sendTransaction(isAdding) {
     }
   })
   .catch(err => {
+
+    console.log('err', err);
     // fetch failed, so save in indexed db
     saveRecord(transaction);
 
