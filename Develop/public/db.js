@@ -49,7 +49,6 @@ function checkDatabase() {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log("In db--------------------------------------",res)
           // If our returned response is not empty
           if (res.length !== 0) {
             // Open another transaction to BudgetStore with the ability to read and write
@@ -61,6 +60,7 @@ function checkDatabase() {
             // Clear existing entries because our bulk add was successful
             currentStore.clear();
             console.log('Clearing store 🧹');
+
           }
         });
     }
