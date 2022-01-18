@@ -1,3 +1,4 @@
+//List of files we want to store while offline
 const FILES_TO_CACHE = [
   '/',
   '/styles.css',
@@ -8,6 +9,8 @@ const FILES_TO_CACHE = [
   '/db.js'
   
 ];
+
+//Modeled from W19 activities
 
 const STATIC_CACHE = "static-cache-v1";
 const RUNTIME_CACHE = "runtime-cache";
@@ -21,7 +24,7 @@ self.addEventListener("install", event => {
   );
 });
 
-// The activate handler takes care of cleaning up old caches.
+
 self.addEventListener("activate", event => {
   const currentCaches = [STATIC_CACHE, RUNTIME_CACHE];
   event.waitUntil(
@@ -46,7 +49,7 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
 
-  // non GET requests are not cached and requests to other origins are not cached
+  // non GET requests are not cached
   if (
     event.request.method !== "GET" || 
     !event.request.url.startsWith(self.location.origin)
@@ -57,7 +60,7 @@ self.addEventListener("fetch", event => {
     return;
   } 
 
-    // handle runtime GET requests for data from /api routes
+    //After if, handles GET
     if (event.request.url.includes("/api/transaction")) {
       // make network request and fallback to cache if network request fails (offline)
       event.respondWith(

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+//Given in starter code
+
 const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
