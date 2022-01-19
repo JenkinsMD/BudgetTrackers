@@ -62,7 +62,7 @@ self.addEventListener("fetch", event => {
 
     //After if, handles GET
     if (event.request.url.includes("/api/transaction")) {
-      // make network request and fallback to cache if network request fails (offline)
+      //make request, use offline storage if not connected to the network
       event.respondWith(
         caches.open(RUNTIME_CACHE).then(cache => {
           return fetch(event.request)
@@ -88,7 +88,7 @@ self.addEventListener("fetch", event => {
         return cachedResponse;
       }
 
-      // request is not in cache. make network request and cache the response
+   
       return caches.open(RUNTIME_CACHE).then(cache => {
         return fetch(event.request).then(response => {
           return cache.put(event.request, response.clone()).then(() => {
